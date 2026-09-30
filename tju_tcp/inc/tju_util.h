@@ -12,6 +12,14 @@ static inline int seq_after(uint32_t a, uint32_t b){
     return (int32_t)(a - b) > 0;
 }
 
+static inline int seq_before_eq(uint32_t a, uint32_t b){
+    return (int32_t)(a - b) <= 0;
+}
+
+static inline int seq_after_eq(uint32_t a, uint32_t b){
+    return (int32_t)(a - b) >= 0;
+}
+
 static inline uint32_t seq_min(uint32_t a, uint32_t b){
     return seq_before(a, b) ? a : b;
 }
@@ -19,5 +27,11 @@ static inline uint32_t seq_min(uint32_t a, uint32_t b){
 static inline uint32_t seq_max(uint32_t a, uint32_t b){
     return seq_before(a, b) ? b : a;
 }
+
+/* 与历史代码兼容的别名 */
+#define seq_lt  seq_before
+#define seq_gt  seq_after
+#define seq_leq seq_before_eq
+#define seq_geq seq_after_eq
 
 #endif

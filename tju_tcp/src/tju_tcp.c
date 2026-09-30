@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #include "tju_tcp.h"
+#include "tju_util.h"
 #include <time.h>
 #include <errno.h>
 #include <sys/time.h>
@@ -142,11 +143,6 @@ static void rdt_log(tju_tcp_t* sock, const char* ev, uint32_t seq, uint32_t ack,
 static int has_flag(uint8_t flags, uint8_t mask){
     return (flags & mask) != 0;
 }
-
-static int seq_lt(uint32_t a, uint32_t b){ return (int32_t)(a - b) < 0; }
-static int seq_leq(uint32_t a, uint32_t b){ return (int32_t)(a - b) <= 0; }
-static int seq_gt(uint32_t a, uint32_t b){ return (int32_t)(a - b) > 0; }
-static int seq_geq(uint32_t a, uint32_t b){ return (int32_t)(a - b) >= 0; }
 
 static void get_local_remote_ip(uint32_t* local_ip, uint32_t* remote_ip){
     if(tju_host_is_server()){
